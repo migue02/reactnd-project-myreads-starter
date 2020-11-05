@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import BookList from './BookList'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import BookList from './BookList';
 
 class Shelf extends Component {
 
@@ -12,10 +12,10 @@ class Shelf extends Component {
     }
 
     render () {
-        const { allBooks, shelf, title, onUpdateBook } = this.props
+        const { allBooks, shelf, title, onUpdateBook } = this.props;
 
         const books = allBooks.filter((book) => {
-            return book.shelf === shelf
+            return book.shelf === shelf;
         })
 
         return (
@@ -29,4 +29,4 @@ class Shelf extends Component {
     }
 }
 
-export default Shelf
+export default Shelf;

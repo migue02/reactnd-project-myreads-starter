@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import BookActions from './BookActions'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import BookActions from './BookActions';
 
 class Book extends Component {
 
@@ -10,9 +10,8 @@ class Book extends Component {
     }
 
     render () {
-        const { book, onUpdateBook } = this.props
-
-        const { imageLinks } = book
+        const { book, onUpdateBook } = this.props;
+        const { imageLinks } = book;
 
         return (
             <li key={book.id}>
@@ -31,4 +30,4 @@ class Book extends Component {
     }
 }
 
-export default Book
+export default Book;

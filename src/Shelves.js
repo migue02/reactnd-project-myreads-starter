@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import Constants from './Constants'
-import Shelf from './Shelf'
-import PropTypes from 'prop-types'
+import React, {Component} from 'react';
+import Constants from './Constants';
+import Shelf from './Shelf';
+import PropTypes from 'prop-types';
 
 class Shelves extends Component {
 
@@ -11,7 +11,7 @@ class Shelves extends Component {
     }
 
     render () {
-        const { books, onUpdateBook } = this.props
+        const { books, onUpdateBook } = this.props;
 
         return (
             <div className="list-books-content">
@@ -25,4 +25,4 @@ class Shelves extends Component {
     }
 }
 
-export default Shelves
+export default Shelves;

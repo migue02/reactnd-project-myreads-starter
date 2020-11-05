@@ -1,41 +1,41 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
-import Book from './Book'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
+import Book from './Book';
 
 class Search extends Component {
 
     static propTypes = {
         books: PropTypes.array.isRequired,
         onUpdateBook: PropTypes.func.isRequired
-    }
+    };
 
     state = {
         results: [],
         query: ''
-    }
+    };
 
     updateResults = (results, books) => {
         this.setState(() => ({
             results: results.map((showingBook) => {
                 const filteredBook = books.filter((book) => {
                     return book.id === showingBook.id;
-                })
+                });
 
-                showingBook.shelf = (filteredBook.length > 0 && filteredBook[0].shelf) || showingBook.shelf || 'none'
+                showingBook.shelf = (filteredBook.length > 0 && filteredBook[0].shelf) || showingBook.shelf || 'none';
                 return showingBook;
             })
         }))
     }
 
     updateQuery = (query) => {
-        const { updateResults } = this
-        const { books } = this.props
+        const { updateResults } = this;
+        const { books } = this.props;
 
         BooksAPI.search(query)
             .then(results => {
-                updateResults((results && results.map && results) || [], books)
+                updateResults((results && results.map && results) || [], books);
             })
 
         this.setState(() => ({
@@ -43,28 +43,20 @@ class Search extends Component {
         }))
     }
 
-    clearQuery = () => {
-        this.setState(() => ({
-            showingBooks: [],
-            query: ''
-        }))
-    }
-
-
     updateBook = (updatedBook, isNew) => {
-        const { onUpdateBook } = this.props
+        const { onUpdateBook } = this.props;
 
-        onUpdateBook(updatedBook, isNew)
-        this.updateResults(this.state.results, [updatedBook])
+        onUpdateBook(updatedBook, isNew);
+        this.updateResults(this.state.results, [updatedBook]);
     }
 
     render () {
-        const { query, results } = this.state
+        const { query, results } = this.state;
 
         return (
             <div className='search-books'>
                 <div className='search-books-bar'>
-                    <Link 
+                    <Link
                         className='close-search'
                         to='/'
                     >Close</Link>
@@ -91,4 +83,4 @@ class Search extends Component {
     }
 }
 
-export default Search
+export default Search;

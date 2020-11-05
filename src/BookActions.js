@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import * as BooksAPI from './BooksAPI'
-import Constants from './Constants'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import * as BooksAPI from './BooksAPI';
+import Constants from './Constants';
 
 class BookActions extends Component {
 
@@ -11,22 +11,22 @@ class BookActions extends Component {
     }
 
     updateBook  = (e) => {
-        const { book, onUpdateBook } = this.props
-        const shelf = e.target.value
+        const { book, onUpdateBook } = this.props;
+        const shelf = e.target.value;
 
         e.preventDefault();
 
         BooksAPI.update(book, shelf)
             .then(() => {
-                const isNew = book.shelf === 'none'
+                const isNew = book.shelf === 'none';
 
-                book.shelf = shelf
-                onUpdateBook(book, isNew)
+                book.shelf = shelf;
+                onUpdateBook(book, isNew);
             })
     }
 
     render () {
-        const { book } = this.props
+        const { book } = this.props;
 
         return (
             <div className='book-shelf-changer'>
@@ -42,4 +42,4 @@ class BookActions extends Component {
     }
 }
 
-export default BookActions
+export default BookActions;
