@@ -6,19 +6,22 @@ import Constants from './Constants'
 class BookActions extends Component {
 
     static propTypes = {
+        book: PropTypes.object.isRequired,
         onUpdateBook: PropTypes.func.isRequired
     }
 
     updateBook  = (e) => {
         const { book, onUpdateBook } = this.props
         const shelf = e.target.value
+
         e.preventDefault();
 
         BooksAPI.update(book, shelf)
-            .then((books) => {
-                console.log(books);
+            .then(() => {
+                const isNew = book.shelf === 'none'
+
                 book.shelf = shelf
-                onUpdateBook(book)
+                onUpdateBook(book, isNew)
             })
     }
 

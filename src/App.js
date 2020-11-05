@@ -2,9 +2,37 @@ import React from 'react'
 import Search from './Search'
 import Shelves from './Shelves'
 import { Route, Link } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 class BooksApp extends React.Component {
+
+    state = {
+      books: []
+    }
+
+    componentDidMount() {
+        BooksAPI.getAll()
+            .then((books) => {
+                console.log('books', books);
+                this.setState(() => ({
+                    books
+                }))
+            })
+    }
+
+    onUpdateBook = (updatedBook, isNew) => {
+      this.setState((currState) => ({
+          books: isNew ? 
+            currState.books.concat([updatedBook])
+            : currState.books.map((book) => {
+              if (updatedBook.id === book.id) {
+                  book.shelf = updatedBook.shelf;
+              }
+              return book;
+          })
+      }))
+    }
 
   render() {
     return (
@@ -14,7 +42,7 @@ class BooksApp extends React.Component {
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
-            <Shelves />
+            <Shelves books={this.state.books} onUpdateBook={this.onUpdateBook} />
             <div className="open-search">
                 <Link
                   to='/search'
@@ -23,7 +51,7 @@ class BooksApp extends React.Component {
           </div>
           )} />
           <Route exact path='/search' render={() => (
-            <Search />
+            <Search books={this.state.books} onUpdateBook={this.onUpdateBook} />
           )} />
       </div>
     )
