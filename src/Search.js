@@ -39,7 +39,7 @@ class Search extends Component {
             })
 
         this.setState(() => ({
-            query: query.trim()
+            query: query
         }))
     }
 
