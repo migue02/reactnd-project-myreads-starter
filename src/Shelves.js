@@ -1,18 +1,43 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import Constants from './Constants'
 import Shelf from './Shelf'
+import * as BooksAPI from './BooksAPI'
 
 class Shelves extends Component {
 
+    state = {
+        books: []
+    }
+
+    componentDidMount() {
+        BooksAPI.getAll()
+            .then((books) => {
+                console.log('books', books);
+                this.setState(() => ({
+                    books
+                }))
+            })
+    }
+
+    onUpdateBook = (updatedBook) => {
+        this.setState((currState) => ({
+            books: currState.books.map((book) => {
+                if (updatedBook.id === book.id) {
+                    book.shelf = updatedBook.shelf;
+                }
+                return book;
+            })
+        }))
+    }
+
     render () {
-        const { allBooks} = this.props
 
         return (
             <div className="list-books-content">
                 <div>
-                    <Shelf title='Currently Reading' shelf='currentlyReading' allBooks={allBooks}/>
-                    <Shelf title='Want to Read' shelf='wantToRead' allBooks={allBooks}/>
-                    <Shelf title='Read' shelf='read' allBooks={allBooks}/>
+                    {Constants.SHELVES.map((shelf) => (
+                        <Shelf key={shelf.key} title={shelf.title} shelf={shelf.key} allBooks={this.state.books} onUpdateBook={this.onUpdateBook}/>
+                    ))}
                 </div>
             </div>
         )

@@ -1,12 +1,11 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import BookList from './BookList'
 
 class Shelf extends Component {
 
     render () {
-        const { allBooks, shelf, title } = this.props
+        const { allBooks, shelf, title, onUpdateBook } = this.props
 
         const books = allBooks.filter((book) => {
             return book.shelf === shelf
@@ -16,7 +15,7 @@ class Shelf extends Component {
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{title}</h2>
                 <div className="bookshelf-books">
-                    <BookList books={books}/>
+                    <BookList books={books} onUpdateBook={onUpdateBook}/>
                 </div>
             </div>
         )
